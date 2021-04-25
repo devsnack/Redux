@@ -1,8 +1,13 @@
-import { configureStore } from "@reduxjs/toolkit";
-import reducer from "./bugs";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import Reducer from "./reducer";
+import logger from "./middelwear/logger";
+import { api } from "./middelwear/api";
 
 const store = () => {
-  const store = configureStore({ reducer });
+  const store = configureStore({
+    reducer: Reducer,
+    middleware: [...getDefaultMiddleware(), api],
+  });
   return store;
 };
 
